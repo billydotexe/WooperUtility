@@ -1,0 +1,37 @@
+[
+    {
+        "Id": 0,
+        "ParentId": null,
+        "Message": "Hi {0}\nWelcome!",
+    "Parameters": [ "FirstName" ],
+    "ImgUrl": "imgs/image",
+    "Buttons": [
+        {
+            "Text": "Voice1",
+            "Url": null,
+            "PageId": 1
+        },
+        {
+            "Text": "Voice2",
+            "Url": null,
+            "PageId": 2
+        }
+        ]
+    },
+    {
+        "Id": 1,
+        "ParentId": 0,
+        "Message": "Voice1",
+        "Parameters": [],
+        "ImgUrl": "imgs/image",
+        "Buttons": []
+      },
+      {
+        "Id": 2,
+        "ParentId": 0,
+        "Message": "Voice2",
+        "Parameters": [],
+        "ImgUrl": "imgs/image",
+        "Buttons": []
+      }
+]
