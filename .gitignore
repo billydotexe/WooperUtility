@@ -38,3 +38,4 @@ msbuild.wrn
 
 #files used by the real bot
 imgs/*
+Wooper.db

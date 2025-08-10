@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    image: wooper
+    volumes:
+      - wooper_data:/app/data
+    deploy:
+      replicas: 1
+
+volumes:
+  wooper_data:
+    driver: local

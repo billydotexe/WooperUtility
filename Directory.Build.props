@@ -1,0 +1,28 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>$([System.DateTime]::UtcNow.ToString("yyyy.MM.dd"))</Version>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CA2007;CA1812;CA1848;CS1591;CA1056;CA2227;CA1002;CA1031</NoWarn>
+    <!--
+      CA2007: Consider calling ConfigureAwait on the awaited task
+      CA1812: Avoid uninstantiated internal classes
+      CA1848: For improved performance, use the LoggerMessage delegates
+      CS1591: required XML comments
+      CA1056: URI properties should not be strings
+      CA2227: Collection properties should be read only
+      CA1002: Do not expose generic lists
+      CA1031: Do not catch general exception types
+    -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>

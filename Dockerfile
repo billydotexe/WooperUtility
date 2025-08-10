@@ -1,14 +1,19 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 as build-env
+﻿ARG DOTNET_VERSION=8.0
+ARG ALPINE_VERSION=3.20
+
+FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS restore
+WORKDIR /src
+COPY ["WooperUtility.csproj", "./"]
+COPY ["Directory.Build.props", "./"]
+RUN dotnet restore
+
+FROM restore AS build
+RUN mkdir -p /app
+COPY Directory.Build.props /app
+COPY . /app/src
+RUN dotnet publish "/app/src/WooperUtility.csproj" --configuration Release --output /dist
+
+FROM mcr.microsoft.com/dotnet/aspnet:${DOTNET_VERSION}-alpine${ALPINE_VERSION}
+COPY --from=build /dist /app
 WORKDIR /app
-
-COPY WooperUtility.csproj .
-RUN dotnet restore WooperUtility.csproj
-
-COPY . .
-RUN dotnet publish -c Release -o out
-
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runtime
-WORKDIR /app
-COPY --from=build-env /app/out ./
-
-ENTRYPOINT ["dotnet", "WooperUtility.dll"]
+ENTRYPOINT ["sh", "-c", "dotnet WooperUtility.dll database update && dotnet WooperUtility.dll"]
